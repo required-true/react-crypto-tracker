@@ -13,7 +13,7 @@ const router = createBrowserRouter([
         element: <Coins />,
       },
       {
-        path: '/coin/:id',
+        path: '/:coinId',
         element: <Coin />,
       },
     ],
