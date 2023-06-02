@@ -1,7 +1,5 @@
-function Coins () {
-  return (
-    <div>Coins</div>
-  )
+function Coins() {
+  return <div>Coins</div>
 }
 
 export default Coins

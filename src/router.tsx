@@ -10,14 +10,14 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <Coins />
+        element: <Coins />,
       },
       {
         path: '/coin/:id',
-        element: <Coin />
+        element: <Coin />,
       },
-    ]
-  }
+    ],
+  },
 ])
 
 export default router
