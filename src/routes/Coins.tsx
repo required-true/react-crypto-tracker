@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import styled from 'styled-components'
+import { fetchCoins } from '../api'
 import CoinListItem from '../components/CoinListItem'
 
 export interface ICoin {
@@ -13,26 +14,16 @@ export interface ICoin {
 }
 
 function Coins() {
-  const [coins, setCoins] = useState<ICoin[]>([])
-  const [loading, setLoading] = useState(true)
-  useEffect(() => {
-    ;(async () => {
-      const response = await fetch('https://api.coinpaprika.com/v1/coins').then(
-        (res) => res.json(),
-      )
-      setCoins(response.slice(0, 30))
-      setLoading(false)
-    })()
-  }, [])
+  const { isLoading, data } = useQuery<ICoin[]>(['allCoins'], fetchCoins)
 
   return (
     <>
       <PageTitle>Coins</PageTitle>
-      {loading ? (
+      {isLoading ? (
         <div>Loading...</div>
       ) : (
         <ul>
-          {coins.map((coin: ICoin) => (
+          {data?.slice(0, 30).map((coin: ICoin) => (
             <CoinListItem key={coin.id} coin={coin} />
           ))}
         </ul>

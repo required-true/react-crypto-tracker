@@ -1,8 +1,25 @@
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { theme } from './theme'
 import Layout from './layouts/Layout'
-
 import './assets/font.css'
+
+function App() {
+  const queryClient = new QueryClient()
+
+  return (
+    <>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <Layout />
+        </ThemeProvider>
+      </QueryClientProvider>
+    </>
+  )
+}
+
+export default App
 
 const GlobalStyle = createGlobalStyle`
   html, body, div, span, applet, object, iframe,
@@ -67,16 +84,3 @@ const GlobalStyle = createGlobalStyle`
     color:inherit;
   }
 `
-
-function App() {
-  return (
-    <>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Layout />
-      </ThemeProvider>
-    </>
-  )
-}
-
-export default App
