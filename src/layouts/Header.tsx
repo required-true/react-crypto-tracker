@@ -1,11 +1,19 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useMatch, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 function Header() {
+  const isHome = useMatch('/')
+  const navigate = useNavigate()
+  console.log(isHome)
+
   return (
     <>
       <HeaderStyle>
-        <NavLinkStyle to="/">Home</NavLinkStyle>
+        {isHome ? (
+          <NavLinkStyle to="/">Home</NavLinkStyle>
+        ) : (
+          <BtnBack onClick={() => navigate(-1)}>&larr;</BtnBack>
+        )}
       </HeaderStyle>
     </>
   )
@@ -33,12 +41,14 @@ const NavLinkStyle = styled(NavLink)`
     height: 2px;
     background-color: ${(props) => props.theme.textColor};
   }
+`
 
-  &.active {
-    color: ${(props) => props.theme.accentColor};
-
-    &::after {
-      background-color: ${(props) => props.theme.accentColor};
-    }
-  }
+const BtnBack = styled.button`
+  padding: 10px;
+  border: none;
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  background: none;
+  outline: none;
 `

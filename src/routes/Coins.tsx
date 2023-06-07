@@ -20,7 +20,7 @@ function Coins() {
     <>
       <PageTitle>Coins</PageTitle>
       {isLoading ? (
-        <div>Loading...</div>
+        <Loading>Loading...</Loading>
       ) : (
         <ul>
           {data?.slice(0, 30).map((coin: ICoin) => (
@@ -34,6 +34,14 @@ function Coins() {
 
 const PageTitle = styled.h2`
   padding: 20px 0 10px;
+  font-weight: 700;
+  font-size: 18px;
+`
+
+const Loading = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 20px;
   font-weight: 700;
   font-size: 18px;
 `
