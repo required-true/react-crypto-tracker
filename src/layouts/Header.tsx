@@ -1,19 +1,19 @@
-import { NavLink, useMatch, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
+import { useRecoilState } from 'recoil'
+import { isDarkAtom } from '../atoms'
 
 function Header() {
-  const isHome = useMatch('/')
-  const navigate = useNavigate()
-  console.log(isHome)
+  const [isDark, setIsDark] = useRecoilState(isDarkAtom)
+  const toggleDarkAtom = () => setIsDark((prev) => !prev)
 
   return (
     <>
       <HeaderStyle>
-        {isHome ? (
-          <NavLinkStyle to="/">Home</NavLinkStyle>
-        ) : (
-          <BtnBack onClick={() => navigate(-1)}>&larr;</BtnBack>
-        )}
+        <NavLinkStyle to="/">HOME</NavLinkStyle>
+        <ThemeToggleBtn onClick={toggleDarkAtom}>
+          {isDark ? 'LIGHT' : 'DARK'}
+        </ThemeToggleBtn>
       </HeaderStyle>
     </>
   )
@@ -22,6 +22,7 @@ export default Header
 
 const HeaderStyle = styled.header`
   display: flex;
+  justify-content: space-between;
   margin-bottom: 10px;
 `
 
@@ -43,12 +44,11 @@ const NavLinkStyle = styled(NavLink)`
   }
 `
 
-const BtnBack = styled.button`
-  padding: 10px;
+const ThemeToggleBtn = styled.button`
   border: none;
   font-weight: 700;
   font-size: 18px;
-  color: #fff;
+  color: ${(props) => props.theme.textColor};
   background: none;
-  outline: none;
+  cursor: pointer;
 `

@@ -28,7 +28,7 @@ interface InfoData {
   last_data_at: string
 }
 
-interface PriceData {
+export interface PriceData {
   id: string
   name: string
   symbol: string
@@ -66,7 +66,7 @@ function Coin() {
   const { coinId } = useParams() as RouteParams
   const chartMatched = !!useMatch('/:coinId/chart')
   const priceMatched = !!useMatch('/:coinId/price')
-  console.log(chartMatched, priceMatched)
+
   const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
     ['info', coinId],
     () => fetchCoinInfo(coinId),
@@ -83,7 +83,7 @@ function Coin() {
 
   return (
     <>
-      <PageTitle>Coin</PageTitle>
+      <PageTitle>{coinId.toUpperCase()}</PageTitle>
       {loading ? (
         <Loading>Loading...</Loading>
       ) : infoData ? (
@@ -109,14 +109,14 @@ function Coin() {
       )}
 
       <Tabs>
-        <TabLink isActive={chartMatched} to="chart">
+        <TabLink $isActive={chartMatched} to="chart">
           Chart
         </TabLink>
-        <TabLink isActive={priceMatched} to="price">
+        <TabLink $isActive={priceMatched} to="price">
           Price
         </TabLink>
       </Tabs>
-      <Outlet context={{ coinId }} />
+      <Outlet context={{ coinId, tickersData }} />
     </>
   )
 }
@@ -131,16 +131,16 @@ const Tabs = styled.div`
   margin-bottom: 20px;
 `
 
-const TabLink = styled(NavLink)<{ isActive: boolean }>`
+const TabLink = styled(NavLink)<{ $isActive: boolean }>`
   display: inline-block;
   width: 45%;
   height: 100%;
-  border: 1px solid #eee;
+  border: 1px solid ${(props) => props.theme.borderColor};
   border-radius: 10px;
   line-height: 30px;
   text-align: center;
   color: ${(props) =>
-    props.isActive ? props.theme.accentColor : props.theme.textColor};
+    props.$isActive ? props.theme.accentColor : props.theme.textColor};
 `
 
 const PageTitle = styled.h2`
@@ -164,7 +164,8 @@ const InfoEmpy = styled.div``
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid ${(props) => props.theme.borderColor};
+  background-color: ${(props) => props.theme.bgColor};
   padding: 10px 20px;
   border-radius: 10px;
 `
@@ -174,11 +175,15 @@ const OverviewItem = styled.div`
   flex-direction: column;
   align-items: center;
   width: 33%;
-  span:first-child {
-    font-size: 10px;
-    font-weight: 400;
-    text-transform: uppercase;
-    margin-bottom: 5px;
+
+  span {
+    color: ${(props) => props.theme.textColor};
+    &:first-child {
+      font-size: 10px;
+      font-weight: 400;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
   }
 `
 const Description = styled.p`

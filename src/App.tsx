@@ -1,20 +1,19 @@
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
-import { theme } from './theme'
+import { lightTheme, darkTheme } from './theme'
+import { useRecoilValue } from 'recoil'
+import { isDarkAtom } from './atoms'
+
 import Layout from './layouts/Layout'
 import './assets/font.css'
 
 function App() {
-  const queryClient = new QueryClient()
-
+  const isDark = useRecoilValue(isDarkAtom)
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <Layout />
-        </ThemeProvider>
-      </QueryClientProvider>
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        <GlobalStyle />
+        <Layout />
+      </ThemeProvider>
     </>
   )
 }

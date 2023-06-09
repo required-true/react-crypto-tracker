@@ -18,6 +18,7 @@ export default Layout
 const LayoutWrapper = styled.div`
   overflow: hidden;
   min-width: 375px;
+  max-width: 768px;
   width: 100%;
   padding: 20px;
   margin: 50px auto 0;
@@ -28,7 +29,7 @@ const LayoutContianer = styled.div`
   width: 100%;
   min-height: 500px;
   padding: 10px;
-  border: 1px solid #eee;
+  border: 1px solid ${(props) => props.theme.borderColor};
   border-radius: 10px;
   box-sizing: border-box;
 `

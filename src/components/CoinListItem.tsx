@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { ICoin } from '../routes/Coins'
 
 const onErrorImg = (event: SyntheticEvent<HTMLImageElement, Event>) => {
-  event.currentTarget.src = '/no-img.png'
+  event.currentTarget.src = '/images/no-img.png'
 }
 
 interface ICoinListItemProps {
@@ -32,9 +32,10 @@ const Wrapper = styled.li`
   width: 100%;
   padding: 10px;
   margin-top: 10px;
+  border: 1px solid ${(props) => props.theme.borderColor};
   border-radius: 5px;
   color: #222;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.cardBgColor};
 `
 
 const Container = styled(NavLink)`
@@ -54,12 +55,13 @@ const Image = styled.img`
 const Title = styled.span`
   font-weight: 700;
   font-size: 14px;
-  color: #222;
+  color: ${(props) => props.theme.textColor};
 `
 
 const Rarr = styled.span`
   position: absolute;
   right: 10px;
   top: 50%;
+  color: ${(props) => props.theme.textColor};
   transform: translateY(-50%);
 `
