@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/react-crypto-tracker/static/css/main.58ce69e5.css",
-    "main.js": "/react-crypto-tracker/static/js/main.9f2f05fe.js",
+    "main.js": "/react-crypto-tracker/static/js/main.a978e51b.js",
     "index.html": "/react-crypto-tracker/index.html",
-    "main.9f2f05fe.js.map": "/react-crypto-tracker/static/js/main.9f2f05fe.js.map"
+    "main.a978e51b.js.map": "/react-crypto-tracker/static/js/main.a978e51b.js.map"
   },
   "entrypoints": [
     "static/css/main.58ce69e5.css",
-    "static/js/main.9f2f05fe.js"
+    "static/js/main.a978e51b.js"
   ]
 }
